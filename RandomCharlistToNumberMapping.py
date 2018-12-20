@@ -1,8 +1,8 @@
 """
-This module fetches available OS Updates for iOS Devices
+Script to find out the valid numbers from a given character list
 # -----------------------------------------------------------
 # Original Author: Subhashini Tatipamula
-# Created Date : 23-Nov-2018
+# Created Date : 11-Dec-2018
 # ------------------------------------------------------------
 """
 input = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE']
