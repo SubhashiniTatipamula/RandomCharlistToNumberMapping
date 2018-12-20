@@ -54,11 +54,10 @@ print(repeat_count)
 print(elm_dict)
 print(expecting_count)
 print(length)
-print(final_set)
 
 while length != expecting_count:
     for word in probable_set:
-        if filtering_data.intersection(word) == j:
+        if filtering_data.intersection(word) == filtering_data:
             if expecting_count < length:
                 final_set.append(word)
                 expecting_count += len(word)
