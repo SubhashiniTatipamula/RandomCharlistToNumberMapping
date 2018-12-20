@@ -12,63 +12,75 @@ temp = {'Z': ['ZERO'], 'E': ['ZERO', 'ONE', 'THREE', 'FIVE', 'SEVEN', 'NINE', 'E
         'V': ['FIVE', 'SEVEN'], 'S': ['SIX', 'SEVEN'], 'X': ['SIX'], 'G': ['EIGHT']}
 
 # input_char_list = ['O', 'Z', 'O', 'N', 'E', 'T', 'O', 'W', 'E', 'R', 'R', 'Z', 'O', 'E']
-input_char_list = ['S', 'E', 'V', 'E', 'N', 'F', 'O', 'U', 'R']
+
+
+input_char_list = ['S', 'E', 'V', 'E', 'N', 'F', 'O', 'U', 'R', 'F', 'O', 'U', 'R']
+
+
+# Method to return non matching characters
+def diff(temp_list):
+    char_set = set()
+    print(set(ip).intersection(temp_list))
+    if set(input_char_list).intersection(temp_list):
+        for letter in ip:
+            if letter in temp_list and (input_char_list.count(letter) == temp_list.count(letter)):
+                pass
+            else:
+                char_set.add(letter)
+
+    return char_set
+
 
 # Fetching probable words set
 probable_set = set()
-intermediate_set = set()
+final_list = list()
 unwanted_char = set(temp.keys()) - set(input_char_list)
 repeat_count = dict()
 length = len(input_char_list)
 expecting_count = 0
 for char in input_char_list:
     words = temp[char]
-    repeat_count[char] = repeat_count.get(char, 0) + 1
     for word in words:
         for elm in unwanted_char:
             if elm in word:
                 break
         else:
             probable_set.add(word)
+            repeat_count[word] = repeat_count.get(word, 0) + 1
 
-print(probable_set)
-
-
-elm_dict = {}
-for k in repeat_count.keys():
-    for index, word in enumerate(probable_set):
-        if k in word:
-            elm_dict[k] = (elm_dict.get(k, list())) + [word]
-        else:
-            pass
-
-# Collecting initial set of expected words and required data for figuring out the missing ones
-filtering_data = set()
-for k in repeat_count.keys():
-    if repeat_count[k] == len(elm_dict[k]):
-        intermediate_set.update(elm_dict[k])
-    else:
-        intermediate_set.add(k)
-
-for word in intermediate_set:
+final_list = list(probable_set)
+for word in final_list:
     expecting_count += len(word)
-final_list = list(intermediate_set)
-
-print(filtering_data)
+print(probable_set)
 print(repeat_count)
-print(elm_dict)
 print(expecting_count)
 print(length)
 
+char_balancer = []
+for word in probable_set:
+    char_balancer.extend(word)
+
 # Preparing the final list either by adding the missing words / removing excessive words
+sorted_dict = {r: repeat_count[r] for r in sorted(repeat_count, key=repeat_count.get, reverse=True)}
+sorted_list = list(sorted_dict.keys())
+print(sorted_list)
+add_index = 0
 while length != expecting_count:
-    for word in probable_set:
-        if filtering_data.intersection(word) == filtering_data:
-            if expecting_count < length:
-                final_list.append(word)
-                expecting_count += len(word)
-            elif length != expecting_count:
+    if expecting_count < length:
+        elm = sorted_list[add_index]
+        final_list.append(elm)
+        char_balancer.extend(elm)
+        expecting_count += len(elm)
+        add_index += 1
+
+    test = diff(char_balancer)
+    if test:
+        print(test)
+        for word in final_list:
+            temp_val = test.intersection(word)
+            if temp_val == test or (len(temp_val) > len(word) / 2):
                 final_list.remove(word)
                 expecting_count -= len(word)
-
+                for char in word:
+                    char_balancer.remove(char)
 print(final_list)
