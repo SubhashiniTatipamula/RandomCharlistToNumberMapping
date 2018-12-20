@@ -11,18 +11,18 @@ temp = {'Z': ['ZERO'], 'E': ['ZERO', 'ONE', 'THREE', 'FIVE', 'SEVEN', 'NINE', 'E
         'H': ['THREE', "EIGHT"], 'F': ['FOUR', 'FIVE'], 'U': ['FOUR'], 'I': ['FIVE', 'SIX', 'EIGHT', 'NINE'],
         'V': ['FIVE', 'SEVEN'], 'S': ['SIX', 'SEVEN'], 'X': ['SIX'], 'G': ['EIGHT']}
 
-# input_char_list = ['O', 'Z', 'O', 'N', 'E', 'T', 'O', 'W', 'E', 'R', 'R', 'Z', 'O', 'E']
+#input_char_list = ['O', 'Z', 'O', 'N', 'E', 'T', 'O', 'W', 'E', 'R', 'R', 'Z', 'O', 'E']
 
 
-input_char_list = ['S', 'E', 'V', 'E', 'N', 'F', 'O', 'U', 'R', 'F', 'O', 'U', 'R']
+#input_char_list = ['S', 'E', 'V', 'E', 'N', 'F', 'O', 'U', 'R', 'F', 'O', 'U', 'R']
 
 
 # Method to return non matching characters
 def diff(temp_list):
     char_set = set()
-    print(set(ip).intersection(temp_list))
+    print(set(input_char_list).intersection(temp_list))
     if set(input_char_list).intersection(temp_list):
-        for letter in ip:
+        for letter in input_char_list:
             if letter in temp_list and (input_char_list.count(letter) == temp_list.count(letter)):
                 pass
             else:
